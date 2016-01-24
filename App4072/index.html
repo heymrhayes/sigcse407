@@ -1,0 +1,57 @@
+<!--
+
+    App4072/index.html
+    
+    app with simple functionality
+    
+    author:  dphayes
+    date:    2016/01/23
+    
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>407 App 2</title>
+<style>
+    p {
+       font-family: "Comic Sans MS",serif;
+       font-size: 5em;
+       text-align: center;
+       width:100%;
+       height:100%;
+    }
+    
+    
+</style>
+</head>
+
+<body onclick="changeBackgroundColor();">
+
+<p id="p1">Change Colors</p>
+<script>
+    var arrColors = ["blue","red","green","yellow"];
+    var intIdxColors = 0;
+    
+    var changeBackgroundColor = function () {
+        
+        document.body.style.backgroundColor = arrColors[intIdxColors];
+        
+        if (document.body.style.backgroundColor == "yellow") 
+            document.getElementById("p1").style.color = "black";
+        else
+            document.getElementById("p1").style.color = "white";
+       
+        
+        if (intIdxColors >= arrColors.length - 1) 
+            intIdxColors = 0;
+        else
+            intIdxColors ++;
+    }
+    
+    
+    
+</script>
+</body>
+
+</html>

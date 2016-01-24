@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+
+  
+  
+
+  
+  
+  
+
+  
+
+  <script type="text/javascript" src="jquery-1.11.0.js"></script>
+
+  
+
+  
+
+  
+    
+      <script type="text/javascript" src="jquery.mobile-1.4.4.min.js"></script>
+    
+    
+      <link rel="stylesheet" type="text/css" href="jquery.mobile-1.4.4.min.css">
+    
+  
+
+  
+    <link rel="stylesheet" type="text/css" href="css/result-light.css">
+  
+
+  
+
+  <style type="text/css">
+    
+  </style>
+
+  <title>jQuery Flash Card  by dphayes</title>
+
+  
+    
+
+
+
+
+<script type='text/javascript'>//<![CDATA[
+$(window).load(function(){
+var questions = [
+{question: "2 + 3", answer: "5"},
+{question: "blue", answer: "green"}
+];
+
+var idxQ = 0;
+
+function loadQuestion (intIndex) {
+  $("#pQuestion").html(questions[intIndex].question);
+  $("#pAnswer").html(questions[intIndex].answer);
+}
+
+function loadNextQuestion () {
+  idxQ++;
+  loadQuestion(idxQ);
+  $(':mobile-pagecontainer').pagecontainer('change', '#question');
+}
+
+$(document).ready( function () {
+  loadQuestion(idxQ);
+  $("#btnNextQ").click(function () {
+  loadNextQuestion()
+  });
+});
+
+});//]]> 
+
+</script>
+
+  
+</head>
+
+<body>
+  <!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+
+<div data-role="page" id="question">
+  <div data-role="header">
+    <h1>
+    Flash Cards
+    </h1>
+    
+  </div>
+
+  <div data-role="main" class="ui-content">
+    <p id="pQuestion">2 + 3</p>
+    <a href="#answer" data-transition="flip" class="ui-btn">Answer</a>
+  </div>
+
+  <div data-role="footer">
+    <h1>Footer Text</h1>
+  </div>
+</div> 
+
+<div data-role="page" id="answer">
+  <div data-role="header">
+    <h1></h1>
+  </div>
+
+  <div data-role="main" class="ui-content">
+    <p id="pAnswer">5</p>
+    <button id="btnNextQ"  class="ui-btn">Next Question</button>
+  </div>
+
+  <div data-role="footer">
+    <h1>Footer Text In Dialog</h1>
+  </div>
+</div> 
+
+
+</body>
+</html>
+
+  
+</body>
+
+</html>
+

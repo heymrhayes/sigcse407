@@ -1,0 +1,126 @@
+<!--
+
+    App4073/index.html
+    
+    3 screen jQueryMobile SPA 
+
+    author:  dphayes
+    date:    2016/01/23
+
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<!-- Include meta tag to ensure proper rendering and touch zooming -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Include jQuery Mobile stylesheets -->
+<link rel="stylesheet" href="./css/jquery.mobile-1.4.5.min.css">
+
+<!-- Include the jQuery library -->
+<script src="./scripts/jquery-1.11.3.min.js"></script>
+
+<!-- Include the jQuery Mobile library -->
+<script src="./scripts/jquery.mobile-1.4.5.min.js"></script>
+
+
+<title>407 App 3</title>
+<style>
+    p {
+       font-family: "Comic Sans MS",serif;
+       font-size: 2em;
+       text-align: center;
+       width:100%;
+       height:100%;
+    }
+    
+    img {width:100%;}
+    
+    
+</style>
+</head>
+
+<body>
+    
+<div data-role="page" id="home">
+  <div data-role="header">
+    <h1>Cats, Dogs, or ?</h1>
+    <div data-role="navbar">
+      <ul>
+        <li><a href="#cat">Cats</a></li>
+        <li><a href="#dog">Dogs</a></li>
+        <li><a href="#other">???</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div data-role="main" class="ui-content">
+    <p>This is the app for when you need a cute animal picture.</p>
+    <p>Use the nav buttons to make your choice.</p>
+  </div>
+
+  <div data-role="footer">
+    <h1>Cute Animals by dphayes 2016</h1>
+  </div>
+</div> 
+    
+<div data-role="page" id="cat">
+  <div data-role="header">
+    <div data-role="navbar">
+      <ul>
+        <li><a href="#" class="ui-btn" data-rel="back">Back</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div data-role="main" class="ui-content">
+    <img src="images/cat_PNG1631.png" alt="cute kitten">
+  </div>
+
+  <div data-role="footer">
+    <h1>Cute Animals by dphayes 2016</h1>
+  </div>
+</div>   
+
+<div data-role="page" id="dog">
+  <div data-role="header">
+    <div data-role="navbar">
+      <ul>
+        <li><a href="#" class="ui-btn" data-rel="back">Back</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div data-role="main" class="ui-content">
+    <img src="images/labradorretriever2.jpg" alt="cute puppy">
+  </div>
+
+  <div data-role="footer">
+    <h1>Cute Animals by dphayes 2016</h1>
+  </div>
+</div>     
+
+<div data-role="page" id="other">
+  <div data-role="header">
+    <div data-role="navbar">
+      <ul>
+        <li><a href="#" class="ui-btn" data-rel="back">Back</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div data-role="main" class="ui-content">
+        <div>
+            <img src="images/web-ZOOM_W03_BEARWAVE_unprocessed-614x359.jpg" alt="cute bear">
+      </div>
+  </div>
+
+  <div data-role="footer">
+    <h1>Cute Animals by dphayes 2016</h1>
+  </div>
+</div>   
+
+</body>
+
+</html>

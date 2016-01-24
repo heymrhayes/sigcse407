@@ -1,0 +1,166 @@
+<!--
+
+    App4074/index.html
+    
+    jQuery Flash Card SPA with embedded data
+
+    author:  dphayes
+    date:    2016/01/23
+
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<!-- Include meta tag to ensure proper rendering and touch zooming -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Include jQuery Mobile stylesheets -->
+<link rel="stylesheet" href="./css/jquery.mobile-1.4.5.min.css">
+
+<!-- Include the jQuery library -->
+<script src="./scripts/jquery-1.11.3.min.js"></script>
+
+<!-- Include the jQuery Mobile library -->
+<script src="./scripts/jquery.mobile-1.4.5.min.js"></script>
+
+
+<title>407 App 4</title>
+<style>
+    p {
+       font-family: "Comic Sans MS",serif;
+       font-size: 2em;
+       text-align: center;
+       width:100%;
+       height:100%;
+    }
+    
+    #pCategory {
+      font-size: 1em;
+    }
+    
+    
+    img {width:100%;}
+    
+    
+</style>
+</head>
+
+<body>
+
+<div data-role="page" id="home">
+  <div data-role="header">
+    <h1>
+    Flash Cards
+    </h1>
+    
+  </div>
+
+  <div data-role="main" class="ui-content">
+      <div>
+        <a href="#question" data-transition="flip" >
+          <img src="./images/call-to-action-page.jpg" alt="go button">
+        </a>
+      </div>
+  </div>
+
+  <div data-role="footer">
+    <h1>Flash Cards by dphayes 2016</h1>
+  </div>
+</div> 
+
+
+
+
+    
+<div data-role="page" id="question">
+  <div data-role="header">
+    <h1>
+    Flash Cards
+    </h1>
+    
+  </div>
+
+  <div data-role="main" class="ui-content">
+    <p id="pCategory"></p>
+    <p id="pQuestion"></p>
+    <a href="#answer" data-transition="flip" class="ui-btn">Answer</a>
+  </div>
+
+  <div data-role="footer">
+    <h1>Flash Cards by dphayes 2016</h1>
+  </div>
+</div> 
+
+<div data-role="page" id="answer">
+  <div data-role="header">
+    <h1></h1>
+  </div>
+
+  <div data-role="main" class="ui-content">
+    <p id="pAnswer"></p>
+    <button id="btnNextQ"  class="ui-btn">Next Question</button>
+  </div>
+
+  <div data-role="footer">
+    <h1>Flash Cards by dphayes 2016</h1>
+  </div>
+</div>   
+
+<div data-role="page" id="complete">
+  <div data-role="header">
+    <h1></h1>
+  </div>
+
+  <div data-role="main" class="ui-content">
+    <p id="pComplete">Congratulations!<br>
+    You've finished all the questions.</p>
+    <a href="#home" class="ui-btn">Home</a>
+  </div>
+
+  <div data-role="footer">
+    <h1>Flash Cards by dphayes 2016</h1>
+  </div>
+</div>  
+
+
+
+
+
+<script>
+  var questions = [
+  {category: "algebra", question: "2 + 3", answer: "5"},
+  {category: "general", question: "blue", answer: "green"}
+  ];
+  
+  var idxQ = 0;
+  
+  function loadQuestion (intIndex) {
+  	$("#pCategory").html(questions[intIndex].category);
+  	$("#pQuestion").html(questions[intIndex].question);
+  	$("#pAnswer").html(questions[intIndex].answer);
+  }
+  
+  function loadNextQuestion () {
+  	idxQ++;
+  	if (idxQ >= questions.length) {
+      $(':mobile-pagecontainer').pagecontainer('change', '#complete');
+  	}
+  	else {
+      loadQuestion(idxQ);
+      $(':mobile-pagecontainer').pagecontainer('change', '#question');
+  	}
+  }
+  
+  $(document).ready( function () {
+  	loadQuestion(idxQ);
+    $("#btnNextQ").click(function () {
+      loadNextQuestion();
+    });
+  });
+
+</script>
+
+</body>
+
+</html>
