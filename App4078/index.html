@@ -1,0 +1,169 @@
+<!--
+
+    App4078/index.html
+    
+    jQuery Mobile App 
+    Map CPL Locations
+    
+    pulls data from City of Chicago Data Portal
+
+    http://https://data.cityofchicago.org/
+
+
+    author:  dphayes
+    date:    2016/03/04
+
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<!-- Include meta tag to ensure proper rendering and touch zooming -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Include jQuery Mobile stylesheets -->
+<link rel="stylesheet" href="./css/jquery.mobile-1.4.5.min.css">
+
+<!-- Include the jQuery library -->
+<script src="./scripts/jquery-1.11.3.min.js"></script>
+
+<!-- Include the jQuery Mobile library -->
+<script src="./scripts/jquery.mobile-1.4.5.min.js"></script>
+
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=visualization"></script>
+<style type="text/css">
+    h1 {
+      font-family: Verdana;
+    }
+    
+    #divMap {
+      width:100%;
+      height:480px;
+    }
+</style>
+<title>407 App 8</title>
+</head>
+
+<body>
+
+
+<div data-role="page" id="home">
+  <div data-role="header">
+    <h1>Chicago Public Library Branches</h1>
+  </div>
+  <div data-role="main" class="ui-content">
+      <div id="divMap">
+      </div>
+  </div>
+</div> 
+
+
+
+<script type='text/javascript'>
+    
+    $(document).ready(function () {
+    		getLibraryData();
+    });
+    
+    
+    function getLibraryData() {
+      var endpointUrl = "https://data.cityofchicago.org/resource/x8fc-8rcq.json";
+    
+      var queryString = "?";
+    
+      var dataUrl = endpointUrl + queryString;
+      
+      console.log(dataUrl);
+      
+      var jqxhr = $.get(dataUrl)
+        .done(function(data) {	
+    				console.log(data);
+            drawMap(data);		// if we get data back, draw the map
+           
+        })
+        .fail(function() {
+          //  if the request fails
+          alert( "error" );
+        })
+        .always(function() {
+          //  upon completion, whether success or fail
+        });
+    
+    
+    }
+    
+    
+    function drawMap(data) {
+      
+      // define the center and create the map
+    
+      var map = new google.maps.Map(document.getElementById('divMap'), {
+        zoom: 11,
+        center: {lat: parseFloat(data[0].location.latitude), lng: parseFloat(data[0].location.longitude)}
+      });
+    
+      //  for each library record, create a marker and an info window
+    
+       $.each(data, function (i, entry) {
+    
+          // create the content for the info window and store in a string var
+          var contentString = '<div id="content">'+
+              '<div id="siteNotice">'+
+              '</div>'+
+              '<h1 id="firstHeading" class="firstHeading">' +
+    					entry.name_ +
+              '</h1>' +
+              '<div id="bodyContent">'+
+              '<p>' +
+              entry.address +
+              '<br>' +
+              entry.city + ', ' + entry.state + ' ' + entry.zip +
+              '</p>'+
+              '<p>' +
+              entry.phone + 
+              '<br>' +
+              '<strong>Hours:</strong> ' +
+              entry.hours_of_operation +
+              '<br><br>' +
+              '<a target="_blank" href="' +
+              entry.website.url + 
+              '">' +
+              entry.website.url +
+              '</a>'
+    					'</p>'+
+              '</div>'+
+              '</div>';
+    
+          // create the info window, using the content string
+          var infowindow = new google.maps.InfoWindow({
+            content: contentString
+          });
+    
+          // create the marker
+          var marker = new google.maps.Marker({
+            position: {
+            						lat: parseFloat(entry.location.latitude), 
+                        lng:parseFloat(entry.location.longitude)
+                      },
+            map: map,
+            title: entry.name_
+          });
+          
+          // create the click event handler for the marker
+          marker.addListener('click', function() {
+            infowindow.open(map, marker);
+          });   
+       
+       });
+    
+    
+    }
+
+  
+
+</script>
+
+</body>
+
+</html>

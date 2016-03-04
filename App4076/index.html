@@ -1,0 +1,133 @@
+<!--
+
+    App4076/index.html
+    
+    jQuery Mobile App 
+    dynamically writes list items
+    
+    pulls NYT movie review data
+
+    http://developer.nytimes.com/docs/movie_reviews_api/
+
+
+    author:  dphayes
+    date:    2016/01/23
+
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<!-- Include meta tag to ensure proper rendering and touch zooming -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Include jQuery Mobile stylesheets -->
+<link rel="stylesheet" href="./css/jquery.mobile-1.4.5.min.css">
+
+<!-- Include the jQuery library -->
+<script src="./scripts/jquery-1.11.3.min.js"></script>
+
+<!-- Include the jQuery Mobile library -->
+<script src="./scripts/jquery.mobile-1.4.5.min.js"></script>
+
+
+<title>407 App 6</title>
+<style>
+
+</style>
+</head>
+
+<body>
+
+
+<div data-role="page" id="home">
+  <div data-role="main" class="ui-content">
+    <h2>NYT Movie Picks</h2>
+    <ul id="listPicks" data-role="listview" data-inset="true">
+      <li data-role="divider">Picks</li>
+     
+    </ul>
+  </div>
+</div> 
+
+
+
+    
+
+
+
+
+
+<script>
+  var apiUrl = "https://api.nytimes.com/svc/movies/v2/reviews/picks.json?order=by-date&api-key=";
+
+  var apiKey = "36dc6b9b7de1ebe4da32fd01483da836:17:60955541";
+
+  
+
+  
+  $(document).ready( function () {
+   
+    getData();
+
+    
+  });
+  
+  function getArrayOfObjectsFromNYTJSON (data) {
+
+    return data.results;
+  }
+  
+  function getData () {
+
+    var jqxhr = $.getJSON( apiUrl + apiKey, function() {
+      console.log( "success" );
+    })
+      .done(function() {
+        console.log( "second success" );
+      })
+      .fail(function() {
+        console.log( "error" );
+      })
+      .always(function() {
+        console.log( "complete" );
+      });
+
+    jqxhr.complete(function(jsonData) {
+      console.log(jsonData.responseJSON.results[0]);
+      var picks = getArrayOfObjectsFromNYTJSON(jsonData.responseJSON);
+      loadPicks(picks);
+    });
+  }
+  
+  function loadPicks (arrPicks) {
+      var strHTML = "";
+
+      $.each(arrPicks, function (i, entry) {
+            strHTML += '<li>'
+                        +  '<a href="#">'
+                        +  '<img src="'
+                        +   arrPicks[i].multimedia.resource.src
+                        +  '">'
+                        +  '<h2>' 
+                        +   arrPicks[i].display_title 
+                        + '</h2>'
+                        +  '<p>' 
+                        +  arrPicks[i].headline 
+                        +  '<br>Opening Date: ' 
+                        +  arrPicks[i].opening_date 
+                        +  '</p>'
+                        +  '</a>'
+                        +  '</li>';
+      });
+      
+      $("#listPicks").append(strHTML);
+      $('#listPicks').listview('refresh');
+    
+  }
+
+</script>
+
+</body>
+
+</html>
